@@ -29,7 +29,7 @@ const NIKAH_TIMELINE = [
   {
     time: 'After Namaz-e-Zohar',
     title: 'Nikah Ceremony',
-    note: 'Sacred Khutbah and solemnization of Qubool Hai',
+    note: '',
   },
   {
     time: '3:00 PM',
@@ -220,33 +220,21 @@ export default function App() {
                 </p>
 
                 <OrnamentalDivider className="w-full max-w-sm my-6" />
-
-                <p className="font-serif-editorial text-sm sm:text-base tracking-[0.2em] uppercase leading-relaxed text-[#7A5338]">
-                  As they begin their forever
-                  <br />
-                  in faith and love
-                </p>
-
-                <p className="mt-4 font-serif-editorial text-2xl sm:text-3xl font-semibold text-[#563826] tabular-nums">
-                  23 December 2026 <span aria-hidden="true">·</span> After
-                  Namaz-e-Zohar
-                </p>
-                <p className="mt-1.5 font-serif-editorial text-lg sm:text-xl text-[#5C3A23]">
-                  Jumla Party Hall, Sansroad
-                </p>
               </InvitationCard>
             </section>
 
             {/* 2. A BLESSED BEGINNING */}
             <section className="mx-auto max-w-3xl">
               <InvitationCard floralVariant="info-left" compact>
-                <p className="font-serif-editorial text-sm sm:text-base tracking-[0.24em] uppercase text-[#7A5338]">
-                  A Blessed Beginning
-                </p>
-                <h2 className="mt-2 font-calligraphy gold-calligraphy text-6xl sm:text-7xl">
-                  A Blessed Beginning
+                <h2 className="text-6xl sm:text-7xl leading-none">
+                  <span className="font-serif-editorial italic gold-calligraphy text-[0.78em] pr-1.5">
+                    A
+                  </span>
+                  <span className="font-calligraphy gold-calligraphy">
+                    Blessed Beginning
+                  </span>
                 </h2>
-                <p className="mt-4 max-w-lg font-serif-editorial text-xl sm:text-2xl leading-relaxed text-[#5E3C26]">
+                <p className="mt-5 max-w-lg font-serif-editorial text-xl sm:text-2xl leading-relaxed text-[#5E3C26]">
                   With hearts full of gratitude, we invite you to share in a day
                   written with love, faith and family. Your presence will make our
                   beginning truly blessed.
@@ -261,10 +249,7 @@ export default function App() {
             {/* 3. SCRATCH TO REVEAL & COUNTDOWN */}
             <section id="countdown" className="mx-auto max-w-3xl scroll-mt-24 space-y-14">
               <InvitationCard floralVariant="info-center" compact>
-                <p className="font-serif-editorial text-sm sm:text-base tracking-[0.24em] uppercase text-[#7A5338]">
-                  A Date With Destiny
-                </p>
-                <h2 className="mt-2 font-calligraphy gold-calligraphy text-6xl sm:text-7xl">
+                <h2 className="font-calligraphy gold-calligraphy text-6xl sm:text-7xl">
                   Scratch to Reveal
                 </h2>
                 <ScratchCard />
@@ -293,10 +278,6 @@ export default function App() {
                     </div>
                   ))}
                 </div>
-
-                <p className="mt-5 font-serif-editorial text-lg sm:text-xl italic text-[#6B4731] tabular-nums">
-                  23 December 2026 <span aria-hidden="true">·</span> 1:00 PM
-                </p>
               </InvitationCard>
             </section>
 
@@ -318,34 +299,30 @@ export default function App() {
 
                 <OrnamentalDivider className="w-full max-w-sm my-6" />
 
-                <div className="w-full max-w-md space-y-0">
-                  {NIKAH_TIMELINE.map((item, idx) => (
-                    <div
-                      key={item.title}
-                      className="relative flex flex-col items-center pb-7 last:pb-0"
-                    >
-                      {idx < NIKAH_TIMELINE.length - 1 && (
-                        <span
-                          className="absolute top-6 bottom-0 left-1/2 w-[1px] -translate-x-1/2 bg-[#9E7322]/65"
-                          aria-hidden="true"
-                        />
-                      )}
-                      <span
-                        className="golden-pearl relative z-10 h-3.5 w-3.5 rounded-full"
-                        aria-hidden="true"
-                      />
-                      <h3 className="mt-2.5 font-serif-editorial text-2xl sm:text-3xl font-semibold text-[#563826]">
-                        {item.title}
-                      </h3>
-                      <p className="mt-0.5 font-serif-editorial text-lg font-medium tracking-wide text-[#845C17] tabular-nums">
-                        {item.time}
-                      </p>
-                      <p className="mt-1 max-w-sm font-serif-editorial text-lg italic text-[#6B4731]">
-                        {item.note}
-                      </p>
-                    </div>
-                  ))}
+            <div className="w-full max-w-md space-y-6">
+              {NIKAH_TIMELINE.map((item) => (
+                <div
+                  key={item.title}
+                  className="flex flex-col items-center text-center"
+                >
+                  <span
+                    className="golden-pearl h-3.5 w-3.5 rounded-full"
+                    aria-hidden="true"
+                  />
+                  <h3 className="mt-2.5 font-serif-editorial text-2xl sm:text-3xl font-semibold text-[#563826]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-0.5 font-serif-editorial text-lg font-medium tracking-wide text-[#845C17] tabular-nums">
+                    {item.time}
+                  </p>
+                  {item.note && (
+                    <p className="mt-1 max-w-sm font-serif-editorial text-lg italic text-[#6B4731]">
+                      {item.note}
+                    </p>
+                  )}
                 </div>
+              ))}
+            </div>
               </InvitationCard>
             </section>
 
@@ -461,23 +438,6 @@ export default function App() {
                 </InvitationCard>
 
                 <InvitationCard floralVariant="info-center" compact>
-                  <Heart className="h-5 w-5 text-[#9E7322]" aria-hidden="true" />
-                  <p className="mt-2 font-serif-editorial text-sm tracking-[0.2em] uppercase text-[#7A5338]">
-                    Your Presence Is Our Present
-                  </p>
-                  <h3 className="mt-1 font-calligraphy gold-calligraphy text-5xl">
-                    Gift of Prayers
-                  </h3>
-                  <OrnamentalDivider className="w-full max-w-[200px] my-3" />
-                  <p className="font-serif-editorial text-lg sm:text-xl italic leading-relaxed text-[#5E3C26]">
-                    Your love, blessings, and prayers are the greatest gift.
-                  </p>
-                  <p className="mt-3 font-serif-editorial text-sm tracking-[0.2em] uppercase text-[#7A5338] tabular-nums">
-                    23 December 2026
-                  </p>
-                </InvitationCard>
-
-                <InvitationCard floralVariant="info-right" compact>
                   <Calendar className="h-5 w-5 text-[#9E7322]" aria-hidden="true" />
                   <p className="mt-2 font-serif-editorial text-sm tracking-[0.2em] uppercase text-[#7A5338]">
                     Nikah Ceremony
@@ -497,6 +457,20 @@ export default function App() {
                   >
                     View Nikah Map
                   </a>
+                </InvitationCard>
+
+                <InvitationCard floralVariant="info-right" compact>
+                  <Heart className="h-5 w-5 text-[#9E7322]" aria-hidden="true" />
+                  <p className="mt-2 font-serif-editorial text-sm tracking-[0.2em] uppercase text-[#7A5338]">
+                    Your Presence Is Our Present
+                  </p>
+                  <h3 className="mt-1 font-calligraphy gold-calligraphy text-5xl">
+                    Gift of Prayers
+                  </h3>
+                  <OrnamentalDivider className="w-full max-w-[200px] my-3" />
+                  <p className="font-serif-editorial text-lg sm:text-xl italic leading-relaxed text-[#5E3C26]">
+                    Your love, blessings, and prayers are the greatest gift.
+                  </p>
                 </InvitationCard>
               </div>
             </section>

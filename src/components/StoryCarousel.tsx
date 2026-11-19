@@ -3,8 +3,8 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const STORY_PHOTOS = [
   {
-    src: '/src/assets/images/story_moment_walk_1795017439911.jpg',
-    alt: 'Our story moment 1, shown from behind walking down a sunlit palace corridor with faces kept out of frame',
+    src: '/src/assets/images/story_moment_walk_hijab_1795103245238.jpg',
+    alt: 'Our story moment 1, bride in a modest ivory and gold hijab and groom walking hand in hand down a sunlit palace corridor, faces out of frame',
     caption: 'Walking together in faith and serenity',
   },
   {

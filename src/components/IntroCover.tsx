@@ -38,10 +38,6 @@ export function IntroCover({ onOpen }: IntroCoverProps) {
               Samira &amp; Mujammil
             </p>
 
-            <p className="mt-2 font-serif-editorial text-base sm:text-lg tracking-[0.24em] uppercase text-[#6E482E] tabular-nums">
-              23 December 2026
-            </p>
-
             <div className="mt-8 flex flex-col items-center">
               <button
                 type="button"
