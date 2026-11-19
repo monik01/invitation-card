@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --ivory-canvas: #d5be97;
+    --ivory-card: #dfc9a3;
+    --ivory-warm: #d6bd92;
+    --gold-deep: #6b470c;
+    --gold-mid: #966a1a;
+    --gold-light: #c9a148;
+    --gold-pale: #dfc17d;
+    --ink-brown: #4a2e1b;
+    --ink-brown-soft: #5c3a23;
+    --ink-brown-muted: #6e482e;
+  }
+
+  html {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    background-color: var(--ivory-canvas);
+    color: var(--ink-brown);
+  }
+}
+
+.font-calligraphy {
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+}
+
+.font-serif-editorial {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+}
+
+.font-arabic {
+  font-family: "Amiri", Georgia, serif;
+}
+
+/* Luminous metallic antique-gold foil calligraphy tuned for darkened parchment cards */
+.gold-calligraphy {
+  background: linear-gradient(
+    135deg,
+    #66420b 0%,
+    #966a18 25%,
+    #c69e44 48%,
+    #875c12 72%,
+    #b99034 88%,
+    #5e3c08 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 1px 1px rgba(68, 42, 24, 0.22));
+  line-height: 1.28;
+  padding-top: 0.08em;
+  padding-bottom: 0.12em;
+}
+
+/* Rich darkened antique parchment canvas texture */
+.ivory-paper-canvas {
+  background-color: #d4bc94;
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(236, 218, 184, 0.55) 0%, transparent 55%),
+    radial-gradient(circle at 80% 75%, rgba(182, 152, 108, 0.52) 0%, transparent 60%),
+    linear-gradient(180deg, #d8c29b 0%, #c9af84 50%, #d4bc94 100%);
+}
+
+/* Noticeably darkened warm antique cream cardstock elevation & shadows */
+.stationery-card {
+  background-color: #dfc9a3;
+  box-shadow:
+    0 28px 65px -14px rgba(62, 36, 16, 0.34),
+    0 12px 26px -6px rgba(120, 82, 22, 0.18),
+    inset 0 0 72px rgba(154, 118, 64, 0.42);
+}
+
+/* Luminous golden pearl sphere */
+.golden-pearl {
+  background: radial-gradient(
+    circle at 32% 30%,
+    #fff8e6 0%,
+    #ecd18a 38%,
+    #c3973e 78%,
+    #8b631b 100%
+  );
+  box-shadow:
+    0 1px 3px rgba(62, 39, 35, 0.28),
+    inset 0 -1px 2px rgba(90, 58, 12, 0.38);
+}
+
+/* Burgundy velvet curtain drapery ONLY for cinematic opening */
+.burgundy-velvet-left {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(26, 3, 9, 0.65) 0px,
+      rgba(86, 15, 34, 0.25) 26px,
+      rgba(125, 27, 51, 0.12) 52px,
+      rgba(45, 7, 17, 0.7) 84px,
+      rgba(95, 18, 39, 0.3) 115px
+    ),
+    linear-gradient(135deg, #4b0c1c 0%, #6d142a 42%, #3a0714 100%);
+  box-shadow: inset -18px 0 40px rgba(18, 2, 6, 0.65);
+}
+
+.burgundy-velvet-right {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(95, 18, 39, 0.3) 0px,
+      rgba(45, 7, 17, 0.7) 31px,
+      rgba(125, 27, 51, 0.12) 63px,
+      rgba(86, 15, 34, 0.25) 89px,
+      rgba(26, 3, 9, 0.65) 115px
+    ),
+    linear-gradient(225deg, #4b0c1c 0%, #6d142a 42%, #3a0714 100%);
+  box-shadow: inset 18px 0 40px rgba(18, 2, 6, 0.65);
+}
+
+/* Subtle falling cream petals */
+@keyframes petalFall {
+  0% {
+    transform: translate3d(0, -8vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.78;
+  }
+  90% {
+    opacity: 0.65;
+  }
+  100% {
+    transform: translate3d(22px, 106vh, 0) rotate(320deg);
+    opacity: 0;
+  }
+}
+
+.cream-petal {
+  position: fixed;
+  top: -30px;
+  border-radius: 72% 28% 72% 28%;
+  background: radial-gradient(circle at 35% 30%, #fffdf6, #f4ead2 62%, #e3d0a8);
+  box-shadow: 0 2px 6px rgba(120, 90, 40, 0.16);
+  animation: petalFall linear infinite;
+  pointer-events: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .cream-petal {
+    display: none;
+  }
+}
