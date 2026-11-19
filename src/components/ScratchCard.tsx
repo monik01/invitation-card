@@ -97,13 +97,8 @@ export function ScratchCard() {
         className="relative mx-auto mt-6 h-[180px] w-full max-w-[320px] overflow-hidden border border-[#8E651B]/80 bg-[#DFC9A3] shadow-md"
       >
         <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
-          <p className="text-4xl sm:text-5xl leading-none">
-            <span className="font-serif-editorial italic gold-calligraphy text-[0.78em] pr-1">
-              A
-            </span>
-            <span className="font-calligraphy gold-calligraphy">
-              Date With Destiny
-            </span>
+          <p className="font-calligraphy gold-calligraphy text-4xl sm:text-5xl leading-none">
+            A Date With Destiny
           </p>
           <p className="mt-2 font-serif-editorial text-2xl sm:text-3xl font-semibold text-[#563826] tabular-nums">
             23 December 2026

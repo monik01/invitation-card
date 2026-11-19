@@ -226,13 +226,8 @@ export default function App() {
             {/* 2. A BLESSED BEGINNING */}
             <section className="mx-auto max-w-3xl">
               <InvitationCard floralVariant="info-left" compact>
-                <h2 className="text-6xl sm:text-7xl leading-none">
-                  <span className="font-serif-editorial italic gold-calligraphy text-[0.78em] pr-1.5">
-                    A
-                  </span>
-                  <span className="font-calligraphy gold-calligraphy">
-                    Blessed Beginning
-                  </span>
+                <h2 className="font-calligraphy gold-calligraphy text-6xl sm:text-7xl leading-none">
+                  A Blessed Beginning
                 </h2>
                 <p className="mt-5 max-w-lg font-serif-editorial text-xl sm:text-2xl leading-relaxed text-[#5E3C26]">
                   With hearts full of gratitude, we invite you to share in a day
