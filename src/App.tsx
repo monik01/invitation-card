@@ -8,7 +8,6 @@ import { ScratchCard } from './components/ScratchCard';
 import { StoryCarousel } from './components/StoryCarousel';
 import { BlessingsCard } from './components/BlessingsCard';
 import {
-  DirectionsModal,
   NIKAH_MAP_URL,
   PRE_WEDDING_MAP_URL,
 } from './components/DirectionsModal';
@@ -41,7 +40,6 @@ const NIKAH_TIMELINE = [
 export default function App() {
   const [opened, setOpened] = useState(false);
   const [musicOn, setMusicOn] = useState(false);
-  const [directionsOpen, setDirectionsOpen] = useState(false);
   const [now, setNow] = useState(() => new Date());
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -279,11 +277,7 @@ export default function App() {
             {/* 4. NIKAH CEREMONY DETAILS & TIMELINE */}
             <section id="timeline" className="mx-auto max-w-3xl scroll-mt-24">
               <InvitationCard floralVariant="ceremony">
-                <p className="font-serif-editorial text-sm sm:text-base tracking-[0.24em] uppercase text-[#7A5338]">
-                  Nikah Day Timeline
-                </p>
-
-                <h2 className="mt-3 font-calligraphy gold-calligraphy text-6xl sm:text-7xl">
+                <h2 className="font-calligraphy gold-calligraphy text-6xl sm:text-7xl">
                   Nikah Ceremony
                 </h2>
 
@@ -409,28 +403,8 @@ export default function App() {
                 </InvitationCard>
               </div>
 
-              {/* EVENT INFORMATION CARDS (3-COLUMN SUMMARY GRID) */}
-              <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 items-stretch">
-                <InvitationCard floralVariant="info-left" compact>
-                  <MapPin className="h-5 w-5 text-[#9E7322]" aria-hidden="true" />
-                  <p className="mt-2 font-serif-editorial text-sm tracking-[0.2em] uppercase text-[#7A5338]">
-                    The Venue
-                  </p>
-                  <h3 className="mt-1 font-calligraphy gold-calligraphy text-5xl">
-                    Jumla Party Hall
-                  </h3>
-                  <p className="mt-1 font-serif-editorial text-xl font-medium text-[#563826]">
-                    Sansroad
-                  </p>
-                  <OrnamentalDivider className="w-full max-w-[200px] my-3" />
-                  <button
-                    type="button"
-                    onClick={() => setDirectionsOpen(true)}
-                    className="cursor-pointer border border-[#9E7322]/75 bg-[#E8D5AF] px-6 py-2.5 font-serif-editorial text-sm font-semibold tracking-[0.14em] uppercase text-[#563826] transition-colors hover:bg-[#DEC595]"
-                  >
-                    Venue &amp; Maps
-                  </button>
-                </InvitationCard>
+              {/* EVENT INFORMATION CARDS (2-COLUMN SUMMARY GRID) */}
+              <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2 items-stretch">
 
                 <InvitationCard floralVariant="info-center" compact>
                   <Calendar className="h-5 w-5 text-[#9E7322]" aria-hidden="true" />
@@ -473,10 +447,7 @@ export default function App() {
             {/* 6. OUR STORY CAROUSEL */}
             <section id="our-story" className="mx-auto max-w-3xl scroll-mt-24">
               <InvitationCard floralVariant="main">
-                <p className="font-serif-editorial text-sm sm:text-base tracking-[0.24em] uppercase text-[#7A5338]">
-                  Our Story
-                </p>
-                <h2 className="mt-2 font-calligraphy gold-calligraphy text-6xl sm:text-7xl">
+                <h2 className="font-calligraphy gold-calligraphy text-6xl sm:text-7xl">
                   Our Story
                 </h2>
                 <p className="mt-1 font-serif-editorial text-lg italic text-[#6B4731]">
@@ -517,11 +488,6 @@ export default function App() {
           </footer>
         </>
       )}
-
-      <DirectionsModal
-        isOpen={directionsOpen}
-        onClose={() => setDirectionsOpen(false)}
-      />
     </div>
   );
 }
