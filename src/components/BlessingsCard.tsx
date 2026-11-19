@@ -81,11 +81,34 @@ export function downloadWeddingCalendar() {
   URL.revokeObjectURL(url);
 }
 
+const FIRST_WHATSAPP_NUMBER = '919687144248';
+
+function buildWhatsAppMessage(blessings: string[], guestName: string): string {
+  const fromValue = guestName.trim() || 'Anonymous';
+  const blessingsText = blessings.map((item) => `• ${item}`).join('\n');
+
+  return [
+    '💍 Samira Weds Mujammil',
+    '',
+    'Someone has shared their blessings with the couple!',
+    '',
+    `From: ${fromValue}`,
+    '',
+    'Selected Blessings:',
+    blessingsText,
+    '',
+    'May Allah bless Samira and Mujammil.',
+    'Ameen ❤️',
+  ].join('\n');
+}
+
 export function BlessingsCard() {
   const [expanded, setExpanded] = useState(true);
   const [selected, setSelected] = useState<string[]>([]);
   const [senderName, setSenderName] = useState('');
-  const [sent, setSent] = useState(false);
+  const [flowStep, setFlowStep] = useState<'idle' | 'first_opened' | 'both_opened'>('idle');
+  const [lockedEncodedMessage, setLockedEncodedMessage] = useState<string | null>(null);
+  const [recordedCurrentBlessing, setRecordedCurrentBlessing] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [history, setHistory] = useState<SavedBlessing[]>(INITIAL_BLESSINGS);
 
@@ -103,41 +126,92 @@ export function BlessingsCard() {
     }
   }, []);
 
+  const currentEncodedMessage =
+    lockedEncodedMessage ??
+    encodeURIComponent(buildWhatsAppMessage(selected, senderName));
+
+  const firstWhatsAppUrl = `https://wa.me/${FIRST_WHATSAPP_NUMBER}?text=${currentEncodedMessage}`;
+
+  const resetProgressIfEdited = () => {
+    if (flowStep !== 'idle') {
+      setFlowStep('idle');
+      setLockedEncodedMessage(null);
+      setRecordedCurrentBlessing(false);
+    }
+  };
+
   const toggleBlessing = (label: string) => {
-    setSent(false);
+    resetProgressIfEdited();
     setErrorMsg('');
     setSelected((prev) =>
       prev.includes(label) ? prev.filter((item) => item !== label) : [...prev, label]
     );
   };
 
-  const handleSend = () => {
+  const handleEmptyValidation = () => {
+    setErrorMsg('Please choose at least one blessing above.');
+  };
+
+  const handleFirstWhatsAppClick = () => {
     if (selected.length === 0) {
       setErrorMsg('Please choose at least one blessing above.');
       return;
     }
 
     setErrorMsg('');
-    const nextEntry: SavedBlessing = {
-      id: `b-${Date.now()}`,
-      sender: senderName.trim() || 'Well-Wisher & Family',
-      blessings: selected,
-      createdAt: 'Shared with love',
-    };
+    const frozenEncoded =
+      lockedEncodedMessage ??
+      encodeURIComponent(buildWhatsAppMessage(selected, senderName));
 
-    const nextHistory = [nextEntry, ...history];
-    setHistory(nextHistory);
-    setSent(true);
-    setSenderName('');
+    // Defer UI transition slightly so the browser completes the native <a target="_blank"> navigation
+    window.setTimeout(() => {
+      setLockedEncodedMessage(frozenEncoded);
+      setFlowStep((prev) => (prev === 'both_opened' ? 'both_opened' : 'first_opened'));
+    }, 120);
+  };
 
-    try {
-      window.localStorage.setItem(
-        'samira_mujammil_blessings_v1',
-        JSON.stringify(nextHistory)
-      );
-    } catch {
-      // Ignore storage errors
+  const handleSecondWhatsAppClick = () => {
+    if (selected.length === 0) {
+      setErrorMsg('Please choose at least one blessing above.');
+      return;
     }
+
+    setErrorMsg('');
+
+    window.setTimeout(() => {
+      if (!recordedCurrentBlessing) {
+        const nextEntry: SavedBlessing = {
+          id: `b-${Date.now()}`,
+          sender: senderName.trim() || 'Anonymous',
+          blessings: [...selected],
+          createdAt: 'Shared with love',
+        };
+
+        const nextHistory = [nextEntry, ...history];
+        setHistory(nextHistory);
+        setRecordedCurrentBlessing(true);
+
+        try {
+          window.localStorage.setItem(
+            'samira_mujammil_blessings_v1',
+            JSON.stringify(nextHistory)
+          );
+        } catch {
+          // Ignore storage errors
+        }
+      }
+
+      setFlowStep('both_opened');
+    }, 120);
+  };
+
+  const handleResetForm = () => {
+    setSelected([]);
+    setSenderName('');
+    setFlowStep('idle');
+    setLockedEncodedMessage(null);
+    setRecordedCurrentBlessing(false);
+    setErrorMsg('');
   };
 
   return (
@@ -233,7 +307,10 @@ export function BlessingsCard() {
                   id="blessing-sender"
                   type="text"
                   value={senderName}
-                  onChange={(e) => setSenderName(e.target.value)}
+                  onChange={(e) => {
+                    resetProgressIfEdited();
+                    setSenderName(e.target.value);
+                  }}
                   placeholder="Your Name or Family Name (optional)"
                   className="w-full border border-[#8E651B]/60 bg-[#E7D4AF] px-4 py-2.5 text-center font-serif-editorial text-lg text-[#4A2E1B] placeholder:text-[#7A563C] focus:border-[#785214] focus:outline-none"
                 />
@@ -259,19 +336,78 @@ export function BlessingsCard() {
                 </p>
               )}
 
-              {sent ? (
-                <p className="mt-4 font-serif-editorial text-2xl font-semibold text-[#785214]">
-                  JazakAllah — Your blessing is received.
-                </p>
-              ) : (
-                <button
-                  type="button"
-                  onClick={handleSend}
-                  disabled={!selected.length}
-                  className="mt-5 w-full cursor-pointer border border-[#785214] bg-[#785214] py-3.5 font-serif-editorial text-base font-semibold tracking-[0.2em] uppercase text-[#FFFDF6] transition-colors hover:bg-[#5E3E0B] disabled:cursor-default disabled:opacity-45"
-                >
-                  Send Blessing
-                </button>
+              {flowStep === 'idle' && (
+                selected.length === 0 ? (
+                  <button
+                    type="button"
+                    onClick={handleEmptyValidation}
+                    className="mt-5 w-full cursor-pointer border border-[#785214] bg-[#785214] py-3.5 font-serif-editorial text-base font-semibold tracking-[0.2em] uppercase text-[#FFFDF6] opacity-70 transition-colors hover:bg-[#5E3E0B]"
+                  >
+                    Send Blessing
+                  </button>
+                ) : (
+                  <a
+                    href={firstWhatsAppUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleFirstWhatsAppClick}
+                    className="mt-5 block w-full cursor-pointer border border-[#785214] bg-[#785214] py-3.5 text-center font-serif-editorial text-base font-semibold tracking-[0.2em] uppercase text-[#FFFDF6] transition-colors hover:bg-[#5E3E0B]"
+                  >
+                    Send Blessing
+                  </a>
+                )
+              )}
+
+              {flowStep === 'first_opened' && (
+                <div className="mt-5 space-y-3 border border-[#8E651B]/55 bg-[#E7D4AF] px-4 py-4 text-center">
+                  <p className="font-serif-editorial text-base italic text-[#5C3A23]">
+                    WhatsApp opened for the first recipient. Please press Send in
+                    WhatsApp, then send the same blessing to the second recipient:
+                  </p>
+
+                  <a
+                    href={firstWhatsAppUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleFirstWhatsAppClick}
+                    className="inline-block border-b border-[#8E651B]/75 pb-0.5 font-serif-editorial text-sm italic text-[#6E482E] transition-colors hover:text-[#4A2E1B]"
+                  >
+                    Re-open first WhatsApp recipient
+                  </a>
+                </div>
+              )}
+
+              {flowStep === 'both_opened' && (
+                <div className="mt-5 space-y-3 border border-[#8E651B]/55 bg-[#E7D4AF] px-4 py-4 text-center">
+                  <p className="font-serif-editorial text-xl font-semibold text-[#785214]">
+                    JazakAllah — Thank you for sharing your blessing.
+                  </p>
+                  <p className="font-serif-editorial text-sm italic text-[#5C3A23]">
+                    Both WhatsApp blessing links have been opened. Please make sure
+                    you pressed Send in WhatsApp for each recipient.
+                  </p>
+
+                  <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+                    <a
+                      href={firstWhatsAppUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block border border-[#8E651B]/80 bg-[#DFC9A3] px-3.5 py-2 font-serif-editorial text-xs font-semibold tracking-[0.12em] uppercase text-[#4A2E1B] transition-colors hover:bg-[#D4BA8E]"
+                    >
+                      Open 1st WhatsApp
+                    </a>
+                  </div>
+
+                  <div>
+                    <button
+                      type="button"
+                      onClick={handleResetForm}
+                      className="cursor-pointer border-b border-[#8E651B]/75 pb-0.5 font-serif-editorial text-sm italic text-[#6E482E] transition-colors hover:text-[#4A2E1B]"
+                    >
+                      Share another blessing
+                    </button>
+                  </div>
+                </div>
               )}
 
               <p className="mt-3 font-serif-editorial text-sm tracking-wide text-[#6E482E] tabular-nums">
