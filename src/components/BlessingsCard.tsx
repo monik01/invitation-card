@@ -213,18 +213,6 @@ export function BlessingsCard() {
           We can&apos;t wait to celebrate with you
         </h2>
 
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-          <span className="font-calligraphy gold-calligraphy text-5xl sm:text-6xl">
-            Samira
-          </span>
-          <span className="font-calligraphy gold-calligraphy text-4xl sm:text-5xl">
-            &amp;
-          </span>
-          <span className="font-calligraphy gold-calligraphy text-5xl sm:text-6xl">
-            Mujammil
-          </span>
-        </div>
-
         <p className="mt-4 font-serif-editorial text-base sm:text-lg tracking-[0.18em] uppercase leading-relaxed text-[#6B4731]">
           With best compliments from
           <br />

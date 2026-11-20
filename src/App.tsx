@@ -278,7 +278,7 @@ export default function App() {
                   Nikah Ceremony
                 </h2>
 
-                <p className="mt-2 font-serif-editorial text-xl sm:text-2xl italic text-[#6B4731] tabular-nums">
+                <p className="mt-2 font-serif-editorial text-lg font-medium tracking-wide text-[#6B4731] tabular-nums">
                   23 December 2026 <span aria-hidden="true">·</span> Jumla Party Hall,
                   Sansroad
                 </p>
@@ -295,14 +295,14 @@ export default function App() {
                     className="golden-pearl h-3.5 w-3.5 rounded-full"
                     aria-hidden="true"
                   />
-                  <h3 className="mt-2.5 font-serif-editorial text-2xl sm:text-3xl font-semibold text-[#563826]">
+                  <h3 className="mt-2.5 font-serif-editorial text-2xl sm:text-3xl italic font-normal text-[#563826]">
                     {item.title}
                   </h3>
                   <p className="mt-0.5 font-serif-editorial text-lg font-medium tracking-wide text-[#845C17] tabular-nums">
                     {item.time}
                   </p>
                   {item.note && (
-                    <p className="mt-1 max-w-sm font-serif-editorial text-lg italic text-[#6B4731]">
+                    <p className="mt-1 max-w-sm font-serif-editorial text-lg font-medium tracking-wide text-[#6B4731]">
                       {item.note}
                     </p>
                   )}
@@ -332,7 +332,7 @@ export default function App() {
                     Jashn-e-Heena
                   </h3>
 
-                  <p className="mt-2 font-serif-editorial text-xl sm:text-2xl italic text-[#6B4731]">
+                  <p className="mt-2 font-serif-editorial text-xl sm:text-2xl font-medium tracking-wide text-[#6B4731]">
                     An Evening of Henna, Family Warmth &amp; Joy
                   </p>
 
@@ -370,7 +370,7 @@ export default function App() {
                     Rasm-e-Haldi
                   </h3>
 
-                  <p className="mt-2 font-serif-editorial text-xl sm:text-2xl italic text-[#6B4731]">
+                  <p className="mt-2 font-serif-editorial text-xl sm:text-2xl font-medium tracking-wide text-[#6B4731]">
                     Blessings, Traditional Rituals &amp; Afternoon Cheer
                   </p>
 
@@ -402,14 +402,17 @@ export default function App() {
 
                 <InvitationCard floralVariant="info-center" compact>
                   <Calendar className="h-5 w-5 text-[#9E7322]" aria-hidden="true" />
+                  <p className="mt-2 font-serif-editorial text-sm sm:text-base tracking-[0.24em] uppercase text-[#7A5338]">
+                    The Big Day
+                  </p>
                   <h3 className="mt-2 whitespace-nowrap font-calligraphy gold-calligraphy text-[clamp(2.2rem,9.5vw,3rem)] sm:text-5xl">
                     Nikah Ceremony
                   </h3>
                   <p className="mt-1 font-serif-editorial text-sm tracking-[0.2em] uppercase text-[#7A5338] tabular-nums">
-                    23 December
+                    23 December 2026
                   </p>
                   <OrnamentalDivider className="w-full max-w-[200px] my-3" />
-                  <p className="font-serif-editorial text-lg sm:text-xl text-[#5E3C26]">
+                  <p className="font-serif-editorial text-lg sm:text-xl font-medium tracking-wide text-[#5E3C26]">
                     After Namaz-e-Zohar at Jumla Party Hall, Sansroad.
                   </p>
                   <a
@@ -431,7 +434,7 @@ export default function App() {
                     Gift of Prayers
                   </h3>
                   <OrnamentalDivider className="w-full max-w-[200px] my-3" />
-                  <p className="font-serif-editorial text-lg sm:text-xl italic leading-relaxed text-[#5E3C26]">
+                  <p className="font-serif-editorial text-lg sm:text-xl font-medium tracking-wide leading-relaxed text-[#5E3C26]">
                     Your love, blessings, and prayers are the greatest gift.
                   </p>
                 </InvitationCard>
