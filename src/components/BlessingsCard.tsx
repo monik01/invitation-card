@@ -106,7 +106,7 @@ export function BlessingsCard() {
   const [expanded, setExpanded] = useState(true);
   const [selected, setSelected] = useState<string[]>([]);
   const [senderName, setSenderName] = useState('');
-  const [flowStep, setFlowStep] = useState<'idle' | 'first_opened' | 'both_opened'>('idle');
+  const [flowStep, setFlowStep] = useState<'idle' | 'opened'>('idle');
   const [lockedEncodedMessage, setLockedEncodedMessage] = useState<string | null>(null);
   const [recordedCurrentBlessing, setRecordedCurrentBlessing] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -166,19 +166,7 @@ export function BlessingsCard() {
     // Defer UI transition slightly so the browser completes the native <a target="_blank"> navigation
     window.setTimeout(() => {
       setLockedEncodedMessage(frozenEncoded);
-      setFlowStep((prev) => (prev === 'both_opened' ? 'both_opened' : 'first_opened'));
-    }, 120);
-  };
 
-  const handleSecondWhatsAppClick = () => {
-    if (selected.length === 0) {
-      setErrorMsg('Please choose at least one blessing above.');
-      return;
-    }
-
-    setErrorMsg('');
-
-    window.setTimeout(() => {
       if (!recordedCurrentBlessing) {
         const nextEntry: SavedBlessing = {
           id: `b-${Date.now()}`,
@@ -201,7 +189,7 @@ export function BlessingsCard() {
         }
       }
 
-      setFlowStep('both_opened');
+      setFlowStep('opened');
     }, 120);
   };
 
@@ -358,33 +346,14 @@ export function BlessingsCard() {
                 )
               )}
 
-              {flowStep === 'first_opened' && (
-                <div className="mt-5 space-y-3 border border-[#8E651B]/55 bg-[#E7D4AF] px-4 py-4 text-center">
-                  <p className="font-serif-editorial text-base italic text-[#5C3A23]">
-                    WhatsApp opened for the first recipient. Please press Send in
-                    WhatsApp, then send the same blessing to the second recipient:
-                  </p>
-
-                  <a
-                    href={firstWhatsAppUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={handleFirstWhatsAppClick}
-                    className="inline-block border-b border-[#8E651B]/75 pb-0.5 font-serif-editorial text-sm italic text-[#6E482E] transition-colors hover:text-[#4A2E1B]"
-                  >
-                    Re-open first WhatsApp recipient
-                  </a>
-                </div>
-              )}
-
-              {flowStep === 'both_opened' && (
+              {flowStep === 'opened' && (
                 <div className="mt-5 space-y-3 border border-[#8E651B]/55 bg-[#E7D4AF] px-4 py-4 text-center">
                   <p className="font-serif-editorial text-xl font-semibold text-[#785214]">
                     JazakAllah — Thank you for sharing your blessing.
                   </p>
                   <p className="font-serif-editorial text-sm italic text-[#5C3A23]">
-                    Both WhatsApp blessing links have been opened. Please make sure
-                    you pressed Send in WhatsApp for each recipient.
+                    WhatsApp has been opened with your blessing. Please press Send
+                    inside WhatsApp to deliver your message.
                   </p>
 
                   <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
@@ -394,7 +363,7 @@ export function BlessingsCard() {
                       rel="noopener noreferrer"
                       className="inline-block border border-[#8E651B]/80 bg-[#DFC9A3] px-3.5 py-2 font-serif-editorial text-xs font-semibold tracking-[0.12em] uppercase text-[#4A2E1B] transition-colors hover:bg-[#D4BA8E]"
                     >
-                      Open 1st WhatsApp
+                      Open WhatsApp Again
                     </a>
                   </div>
 

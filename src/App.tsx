@@ -17,13 +17,13 @@ const NIKAH_DATE_TARGET = new Date('2026-12-23T13:00:00');
 const NIKAH_TIMELINE = [
   {
     time: '10:00 AM',
-    title: 'Guest Arriving',
+    title: 'Guest Arrival',
     note: 'Warm welcome of family and elders at Jumla Party Hall',
   },
   {
     time: '11:00 AM',
     title: 'Lunch',
-    note: 'Traditional celebratory wedding dastarkhwan',
+    note: 'A joyful feast share with Family and Friends',
   },
   {
     time: 'After Namaz-e-Zohar',
@@ -232,10 +232,7 @@ export default function App() {
                   written with love, faith and family. Your presence will make our
                   beginning truly blessed.
                 </p>
-                <OrnamentalDivider className="w-full max-w-sm my-5" />
-                <p className="font-calligraphy gold-calligraphy text-5xl">
-                  Samira &amp; Mujammil
-                </p>
+                <OrnamentalDivider className="w-full max-w-sm mt-5" />
               </InvitationCard>
             </section>
 
@@ -252,20 +249,20 @@ export default function App() {
                 <p className="font-serif-editorial text-sm sm:text-base tracking-[0.24em] uppercase text-[#7A5338]">
                   Until We Say
                 </p>
-                <h2 className="mt-2 font-calligraphy gold-calligraphy text-6xl sm:text-7xl">
+                <h2 className="mt-2 whitespace-nowrap font-calligraphy gold-calligraphy text-[clamp(2.25rem,10vw,4.5rem)] sm:text-7xl">
                   Qubool Hai
                 </h2>
 
-                <div className="mt-6 grid w-full max-w-md grid-cols-4 gap-3">
+                <div className="mt-6 grid w-full max-w-md grid-cols-2 gap-2.5 sm:grid-cols-4 sm:gap-3">
                   {countdownUnits.map((unit) => (
                     <div
                       key={unit.label}
-                      className="border border-[#8E651B]/70 bg-[#D7BE92] px-2 py-4 text-center"
+                      className="min-w-0 overflow-hidden border border-[#8E651B]/70 bg-[#D7BE92] px-2 py-3.5 text-center sm:px-2 sm:py-4"
                     >
-                      <p className="font-serif-editorial text-4xl sm:text-5xl font-semibold leading-none text-[#4A2E1B] tabular-nums">
+                      <p className="font-serif-editorial text-3xl sm:text-5xl font-semibold leading-none text-[#4A2E1B] tabular-nums">
                         {String(unit.value).padStart(2, '0')}
                       </p>
-                      <p className="mt-2 font-serif-editorial text-xs sm:text-sm tracking-[0.18em] uppercase text-[#6E482E]">
+                      <p className="mt-2 font-serif-editorial text-[11px] sm:text-sm tracking-[0.12em] sm:tracking-[0.18em] uppercase text-[#6E482E]">
                         {unit.label}
                       </p>
                     </div>
@@ -277,7 +274,7 @@ export default function App() {
             {/* 4. NIKAH CEREMONY DETAILS & TIMELINE */}
             <section id="timeline" className="mx-auto max-w-3xl scroll-mt-24">
               <InvitationCard floralVariant="ceremony">
-                <h2 className="font-calligraphy gold-calligraphy text-6xl sm:text-7xl">
+                <h2 className="whitespace-nowrap font-calligraphy gold-calligraphy text-[clamp(2.2rem,9.8vw,4.5rem)] sm:text-7xl">
                   Nikah Ceremony
                 </h2>
 
@@ -318,10 +315,7 @@ export default function App() {
             {/* 5. CELEBRATING TOGETHER — INDIVIDUAL EVENT INVITATION CARDS */}
             <section id="festivities" className="scroll-mt-24 space-y-14">
               <div className="text-center">
-                <p className="font-serif-editorial text-sm sm:text-base tracking-[0.24em] uppercase text-[#7A5338]">
-                  Festivities
-                </p>
-                <h2 className="mt-2 font-calligraphy gold-calligraphy text-6xl sm:text-7xl">
+                <h2 className="font-calligraphy gold-calligraphy text-6xl sm:text-7xl">
                   Celebrating Together
                 </h2>
                 <OrnamentalDivider className="mx-auto max-w-sm my-3" />
@@ -331,10 +325,10 @@ export default function App() {
               <div className="mx-auto max-w-3xl">
                 <InvitationCard floralVariant="hina">
                   <p className="font-serif-editorial text-sm sm:text-base tracking-[0.24em] uppercase text-[#7A5338]">
-                    Festivity One
+                    Day One
                   </p>
 
-                  <h3 className="mt-3 font-calligraphy gold-calligraphy text-6xl sm:text-7xl">
+                  <h3 className="mt-3 whitespace-nowrap font-calligraphy gold-calligraphy text-[clamp(2.25rem,10vw,4.5rem)] sm:text-7xl">
                     Jashn-e-Heena
                   </h3>
 
@@ -369,10 +363,10 @@ export default function App() {
               <div className="mx-auto max-w-3xl">
                 <InvitationCard floralVariant="utsav">
                   <p className="font-serif-editorial text-sm sm:text-base tracking-[0.24em] uppercase text-[#7A5338]">
-                    Festivity Two
+                    Day Two
                   </p>
 
-                  <h3 className="mt-3 font-calligraphy gold-calligraphy text-6xl sm:text-7xl">
+                  <h3 className="mt-3 whitespace-nowrap font-calligraphy gold-calligraphy text-[clamp(2.25rem,10vw,4.5rem)] sm:text-7xl">
                     Rasm-e-Haldi
                   </h3>
 
@@ -408,12 +402,12 @@ export default function App() {
 
                 <InvitationCard floralVariant="info-center" compact>
                   <Calendar className="h-5 w-5 text-[#9E7322]" aria-hidden="true" />
-                  <p className="mt-2 font-serif-editorial text-sm tracking-[0.2em] uppercase text-[#7A5338]">
+                  <h3 className="mt-2 whitespace-nowrap font-calligraphy gold-calligraphy text-[clamp(2.2rem,9.5vw,3rem)] sm:text-5xl">
                     Nikah Ceremony
-                  </p>
-                  <h3 className="mt-1 font-calligraphy gold-calligraphy text-5xl">
-                    23 December
                   </h3>
+                  <p className="mt-1 font-serif-editorial text-sm tracking-[0.2em] uppercase text-[#7A5338] tabular-nums">
+                    23 December
+                  </p>
                   <OrnamentalDivider className="w-full max-w-[200px] my-3" />
                   <p className="font-serif-editorial text-lg sm:text-xl text-[#5E3C26]">
                     After Namaz-e-Zohar at Jumla Party Hall, Sansroad.
